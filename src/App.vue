@@ -1,5 +1,9 @@
 <template>
     <div>
+        <counter/>
+        <hr>
+        <amount/>
+        <hr>
         <el-container>
             <el-header>Header</el-header>
             <el-container>
@@ -25,10 +29,17 @@
                 <h3 class="medium">{{ item }}</h3>
             </el-carousel-item>
         </el-carousel>
+        <el-table v-loading="loading" :data="tableData" style="width: 100%">
+            <el-table-column prop="date" label="日期" width="180"/>
+            <el-table-column prop="name" label="姓名" width="180"/>
+            <el-table-column prop="address" label="地址"/>
+        </el-table>
     </div>
 </template>
 
 <script>
+    import counter from "./components/counter.vue";
+    import amount from "./components/amount.vue";
     export default {
         data() {
             return {
@@ -43,7 +54,21 @@
                 value: '',
                 switchValue: true,
                 initValue: 0,
-                progressValue: 0
+                progressValue: 0,
+                loading: true,
+                tableData: [{
+                    date: '2016-05-03',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-02',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }, {
+                    date: '2016-05-04',
+                    name: '王小虎',
+                    address: '上海市普陀区金沙江路 1518 弄'
+                }],
             }
         },
         methods: {
@@ -56,6 +81,10 @@
                     this.progressValue = this.progressValue + 1;
                 }, 500)
             }
+        },
+        components: {
+            counter,
+            amount
         }
     }
 </script>
